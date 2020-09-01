@@ -11,9 +11,10 @@ const router = Router()
 
 router.post('/signin', SessionController.store)
 
-router.get('/users', UserController.index)
+//router.get('/users', UserController.index)
 router.post('/users', UserController.store)
-router.put('/users', verifyAuth, uploader.single('avatar'), UserController.update)
+router.get('/users/me', verifyAuth, UserController.show)
+router.put('/users/me', verifyAuth, uploader.single('avatar'), UserController.update)
 
 router.get('/posts', PostController.index)
 router.post('/posts', verifyAuth, PostController.store)

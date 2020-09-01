@@ -17,8 +17,15 @@ class PostController {
         }
       }
     })
+    const serializedPosts = posts.map(post => ({
+      ...post,
+      user: {
+        ...post.user,
+        avatar: `http://localhost:8000/uploads/${post.user.avatar}`
+      }
+    }))
 
-    return res.json({ posts })
+    return res.json({ posts: serializedPosts })
   }
 
   public async store(req: Request, res: Response) {
