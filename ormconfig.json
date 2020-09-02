@@ -5,11 +5,10 @@
 	"username": "postgres",
 	"password": "docker",
 	"database": "paircode",
-	"synchronize": true,
 	"logging": false,
 	"entities": [
-		"src/entity/**/*.ts"
-	],
+    "src/entity/**/*.ts"
+  ],
 	"migrations": [
 		"src/migration/**/*.ts"
 	],

@@ -16,7 +16,7 @@ export class User {
 	email: string;
 
 	@Column()
-	discord: string;
+	whatsapp: string;
 
 	@Column({ select: false })
 	passwordHash: string;
@@ -24,7 +24,7 @@ export class User {
 	@Column({ nullable: true })
 	avatar: string;
 
-	@Column({ nullable: true })
+	@Column({ nullable: true, type: 'text' })
 	bio: string;
 
 }

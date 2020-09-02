@@ -16,7 +16,7 @@ export class UserRepository extends Repository<User> {
     return this.findOne(query, { 
       ...options,
       select: [ 
-        'avatar', 'bio', 'discord', 'email', 'firstName', 'lastName', 'id', 'passwordHash' 
+        'avatar', 'bio', 'whatsapp', 'email', 'firstName', 'lastName', 'id', 'passwordHash' 
       ]
     })
   }

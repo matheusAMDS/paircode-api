@@ -5,17 +5,6 @@ import bcrypt from 'bcryptjs'
 import { UserRepository } from 'repository/UserRepository'
 
 class UserController {
-  /* public async index(req: Request, res: Response) {
-    const userRepository = getCustomRepository(UserRepository)
-    const users = await userRepository.find()
-    const serializedUsers = users.map(user => ({
-      ...user,
-      avatar: `http://localhost:8000/uploads/${user.avatar}`
-    }))
-
-    return res.json({ users: serializedUsers })
-  } */
-
   public async show(req: Request, res: Response) {
     const userId = req.userId as number
     const userRepository = getCustomRepository(UserRepository)
@@ -33,7 +22,7 @@ class UserController {
   }
 
   public async store(req: Request, res: Response) {
-    const { firstName, lastName, email, password, discord } = req.body
+    const { firstName, lastName, email, password, whatsapp } = req.body
     const userRepository = getCustomRepository(UserRepository)
 
     const user = await userRepository.findOne({ email })
@@ -45,7 +34,7 @@ class UserController {
       firstName,
       lastName,
       email,
-      discord,
+      whatsapp,
       passwordHash: await bcrypt.hash(password, 10),
     })
 
