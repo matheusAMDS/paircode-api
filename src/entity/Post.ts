@@ -14,7 +14,7 @@ export class Post {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(type => User)
+  @ManyToOne(type => User, user => user.posts)
   user: User;
 
   @Column()

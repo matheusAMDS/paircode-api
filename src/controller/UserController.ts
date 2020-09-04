@@ -8,14 +8,23 @@ class UserController {
   public async show(req: Request, res: Response) {
     const userId = req.userId as number
     const userRepository = getCustomRepository(UserRepository)
-    const user = await userRepository.findOne({ id: userId })
+    const user = await userRepository.findOne({ id: userId }, {
+      relations: [ 'posts', 'posts.user' ]
+    })
     
     if (!user)
       return res.status(400).json({ error: 'No user with the passed id.' })
 
     const serializedUser = {
       ...user,
-      avatar: `http://localhost:8000/uploads/${user.avatar}`
+      avatar: user.avatar && `http://localhost:8000/uploads/${user.avatar}`,
+      posts: user.posts.map(post => ({
+        ...post,
+        user: {
+          ...post.user,
+          avatar: post.user.avatar && `http://localhost:8000/uploads/${post.user.avatar}`
+        }
+      }))
     }
 
     return res.json({ user: serializedUser })

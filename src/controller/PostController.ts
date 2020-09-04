@@ -6,14 +6,14 @@ import { UserRepository } from 'repository/UserRepository'
 
 class PostController {
   public async index(req: Request, res: Response) {
-    const userId = req.query.userId as string
+    const userId = req.query.userId
     const postRepository = getRepository(Post)
     
     const posts = await postRepository.find({
       relations: [ 'user' ],
       where: userId && {
         user: {
-          id: userId
+          id: Number(userId)
         }
       }
     })
@@ -21,7 +21,7 @@ class PostController {
       ...post,
       user: {
         ...post.user,
-        avatar: `http://localhost:8000/uploads/${post.user.avatar}`
+        avatar: post.user.avatar && `http://localhost:8000/uploads/${post.user.avatar}`
       }
     }))
 
