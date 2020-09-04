@@ -4,6 +4,8 @@ import bcrypt from 'bcryptjs'
 
 import { UserRepository } from '../repository/UserRepository'
 
+import { BASE_API_URL } from '../config/app'
+
 class UserController {
   public async show(req: Request, res: Response) {
     const userId = req.userId as number
@@ -17,12 +19,12 @@ class UserController {
 
     const serializedUser = {
       ...user,
-      avatar: user.avatar && `http://localhost:8000/uploads/${user.avatar}`,
+      avatar: user.avatar && `${BASE_API_URL}/uploads/${user.avatar}`,
       posts: user.posts.map(post => ({
         ...post,
         user: {
           ...post.user,
-          avatar: post.user.avatar && `http://localhost:8000/uploads/${post.user.avatar}`
+          avatar: post.user.avatar && `${BASE_API_URL}/uploads/${post.user.avatar}`
         }
       }))
     }

@@ -4,6 +4,8 @@ import { Request, Response } from 'express'
 import { Post } from '../entity/Post'
 import { UserRepository } from '../repository/UserRepository'
 
+import { BASE_API_URL } from '../config/app'
+
 class PostController {
   public async index(req: Request, res: Response) {
     const userId = req.query.userId
@@ -21,7 +23,7 @@ class PostController {
       ...post,
       user: {
         ...post.user,
-        avatar: post.user.avatar && `http://localhost:8000/uploads/${post.user.avatar}`
+        avatar: post.user.avatar && `${BASE_API_URL}/uploads/${post.user.avatar}`
       }
     }))
 
