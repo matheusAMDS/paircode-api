@@ -1,6 +1,6 @@
 import multer from 'multer'
 
-import uploadConfig from 'config/upload'
+import uploadConfig from '../config/upload'
 
 const uploader = multer(uploadConfig)
 

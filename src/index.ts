@@ -5,8 +5,8 @@ import express from 'express'
 import path from 'path'
 import cors from 'cors'
 
-import { PORT } from 'config/app'
-import routes from 'routes'
+import { PORT } from './config/app'
+import routes from './routes'
 
 createConnection().then(async _ => {
 	const app = express()

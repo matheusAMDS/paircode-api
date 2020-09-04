@@ -1,8 +1,8 @@
 import { getRepository, getCustomRepository } from 'typeorm'
 import { Request, Response } from 'express'
 
-import { Post } from 'entity/Post'
-import { UserRepository } from 'repository/UserRepository'
+import { Post } from '../entity/Post'
+import { UserRepository } from '../repository/UserRepository'
 
 class PostController {
   public async index(req: Request, res: Response) {

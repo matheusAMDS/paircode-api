@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { getCustomRepository } from 'typeorm'
 import bcrypt from 'bcryptjs'
 
-import { UserRepository } from 'repository/UserRepository'
+import { UserRepository } from '../repository/UserRepository'
 
 class UserController {
   public async show(req: Request, res: Response) {

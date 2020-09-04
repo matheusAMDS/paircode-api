@@ -1,11 +1,11 @@
 import { Router } from 'express'
 
-import uploader from 'middleware/upload'
-import verifyAuth from 'middleware/verifyAuth'
+import uploader from './middleware/upload'
+import verifyAuth from './middleware/verifyAuth'
 
-import UserController from 'controller/UserController'
-import SessionController from 'controller/SessionController'
-import PostController from 'controller/PostController'
+import UserController from './controller/UserController'
+import SessionController from './controller/SessionController'
+import PostController from './controller/PostController'
 
 const router = Router()
 
