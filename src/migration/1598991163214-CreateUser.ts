@@ -33,7 +33,6 @@ export class CreateUser1598991163214 implements MigrationInterface {
           name: 'passwordHash',
           type: 'varchar',
           isNullable: false
-          
         },
         {
           name: 'whatsapp',

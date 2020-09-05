@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import uploader from './middleware/upload'
+import sendToGCS from './middleware/sendToGCS'
 import verifyAuth from './middleware/verifyAuth'
 
 import UserController from './controller/UserController'
@@ -11,10 +12,15 @@ const router = Router()
 
 router.post('/signin', SessionController.store)
 
-//router.get('/users', UserController.index)
 router.post('/users', UserController.store)
 router.get('/users/me', verifyAuth, UserController.show)
-router.put('/users/me', verifyAuth, uploader.single('avatar'), UserController.update)
+router.put(
+  '/users/me', 
+  verifyAuth, 
+  uploader.single('avatar'),
+  sendToGCS, 
+  UserController.update
+)
 
 router.get('/posts', PostController.index)
 router.post('/posts', verifyAuth, PostController.store)

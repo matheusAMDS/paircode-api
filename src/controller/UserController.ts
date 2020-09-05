@@ -3,8 +3,7 @@ import { getCustomRepository } from 'typeorm'
 import bcrypt from 'bcryptjs'
 
 import { UserRepository } from '../repository/UserRepository'
-
-import { BASE_API_URL } from '../config/app'
+import { BASE_CLOUD_FILE_URL } from '../config/app'
 
 class UserController {
   public async show(req: Request, res: Response) {
@@ -17,19 +16,19 @@ class UserController {
     if (!user)
       return res.status(400).json({ error: 'No user with the passed id.' })
 
-    const serializedUser = {
-      ...user,
-      avatar: user.avatar && `${BASE_API_URL}/uploads/${user.avatar}`,
-      posts: user.posts.map(post => ({
-        ...post,
-        user: {
-          ...post.user,
-          avatar: post.user.avatar && `${BASE_API_URL}/uploads/${post.user.avatar}`
-        }
-      }))
-    }
-
-    return res.json({ user: serializedUser })
+    return res.json({ 
+      user: {
+        ...user,
+        avatar: user.avatar && `${BASE_CLOUD_FILE_URL}/${user.avatar}`,
+        posts: user.posts.map(post => ({
+          ...post,
+          user: {
+            ...post.user,
+            avatar: user.avatar && `${BASE_CLOUD_FILE_URL}/${user.avatar}`
+          }
+        }))
+      } 
+    })
   }
 
   public async store(req: Request, res: Response) {
@@ -54,7 +53,7 @@ class UserController {
 
   public async update(req: Request, res: Response) {
     const id = req.userId as number
-    const bio = req.body.bio as string
+    const bio = req.body.bio
     const filename = req.file && req.file.filename
     const userRepository = getCustomRepository(UserRepository)
     

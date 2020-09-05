@@ -1,15 +1,13 @@
-import multer from 'multer'
+import multer, { Options } from 'multer'
 import path from 'path'
 
 export default {
-  storage: multer.diskStorage({
-    destination: path.resolve(__dirname, '..', '..', 'uploads'),
-    filename: (req, file, cb) => {
-      const { originalname } = file
-      const ext = path.extname(originalname)
-      const filename = path.basename(originalname, ext)
+  limit: 1 * 1024 * 1024,
+  storage: multer.memoryStorage(),
+  fileFilter: (req, file, cb) => {
+    const permittedExts = [ '.png', '.jpg', '.jpeg' ]
+    const ext = path.extname(file.originalname)
 
-      cb(null, `${filename}-${Date.now()}${ext}`)
-    }
-  })
-}
+    cb(null, permittedExts.includes(ext))
+  }
+} as Options

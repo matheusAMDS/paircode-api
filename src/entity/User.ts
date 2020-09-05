@@ -24,7 +24,7 @@ export class User {
 	passwordHash: string;
 
 	@Column({ nullable: true })
-	avatar: string;
+  avatar: string;
 
 	@Column({ nullable: true, type: 'text' })
 	bio: string;
