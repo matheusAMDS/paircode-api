@@ -1,8 +1,13 @@
-import path from 'path'
+import { StorageOptions } from '@google-cloud/storage'
 
 export const BUCKET = process.env.GCLOUD_BUCKET as string
 
+const private_key = process.env.GCLOUD_PRIVATE_KEY?.replace(new RegExp("\\\\n", "\g"), "\n")
+
 export default {
-  keyFilename: path.resolve(__dirname, '..', '..', 'paircode-288519-716ad9d7ddc0.json'),
+  credentials: {
+    client_email: process.env.GCLOUD_CLIENT_EMAIL,
+    private_key
+  },
   projectId: process.env.GCLOUD_PROJECT_ID
-}
+} as StorageOptions

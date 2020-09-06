@@ -1,7 +1,12 @@
-# Awesome Project Build with TypeORM
+# PairCode-API
 
-Steps to run this project:
+This is the api for the PairCode website. Click here to see the 
+[frontend repo](https://github.com/matheusAMDS/paircode-web). 
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+## Techs
+
+  - NodeJS
+  - Express
+  - TypeORM
+  - PostgresSQL
+  - Google Cloud Storage

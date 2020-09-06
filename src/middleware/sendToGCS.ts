@@ -21,7 +21,8 @@ export default function sendToGCS (req: Request, res: Response, next: Next) {
       public: true
     })
   
-    fileStream.on('error', () => {
+    fileStream.on('error', error => {
+      console.log(error)
       return res.status(400).json({ error: 'Unable to upload the avatar.' })
     })
   
