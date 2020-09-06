@@ -12,7 +12,7 @@
 		"ts-node": "3.3.0",
 		"ts-node-dev": "^1.0.0-pre.59",
 		"tsconfig-paths": "^3.9.0",
-		"typescript": "3.3.3333"
+		"typescript": "^3.9.0"
 	},
 	"dependencies": {
 		"@google-cloud/storage": "^5.3.0",
