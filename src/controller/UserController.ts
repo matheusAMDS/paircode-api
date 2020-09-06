@@ -59,7 +59,7 @@ class UserController {
     
     await userRepository.update({ id }, {
       bio,
-      avatar: filename
+      avatar: filename || undefined
     })
 
     return res.status(201).end()
