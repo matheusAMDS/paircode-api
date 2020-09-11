@@ -3,8 +3,8 @@ import { getCustomRepository } from 'typeorm'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
-import { UserRepository } from '../repository/UserRepository'
-import { SECRET, options } from '../config/auth'
+import { UserRepository } from '@app/repositories/UserRepository'
+import { SECRET, options } from '@config/auth'
 
 class SessionController {
   public async store(req: Request, res: Response) {

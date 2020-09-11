@@ -6,7 +6,7 @@ import {
   ManyToOne
 } from 'typeorm'
 
-import { User } from '../entity/User'
+import { User } from './User'
 
 @Entity()
 export class Post {

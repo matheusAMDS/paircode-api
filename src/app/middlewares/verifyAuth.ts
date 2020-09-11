@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction as Next } from 'express'
 
-import { SECRET } from '../config/auth'
+import { SECRET } from '@config/auth'
 
 interface Decoded {
   id: number;

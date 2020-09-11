@@ -6,14 +6,13 @@ module.exports = {
   "url": process.env.DATABASE_URL,
 	"logging": false,
 	"entities": [
-    baseUrl + "entity/**/*" + ext,
+    baseUrl + "app/models/**/*" + ext,
   ],
 	"migrations": [
-    baseUrl + "migration/**/*" + ext,
+    baseUrl + "database/migrations/**/*" + ext,
 	],
 	"cli": {
 		"entitiesDir": "src/entity",
-		"migrationsDir": "src/migration",
-		"subscribersDir": "src/subscriber"
+		"migrationsDir": "src/database/migrations"
 	}
 }

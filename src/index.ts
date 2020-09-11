@@ -4,7 +4,7 @@ import { createConnection } from "typeorm"
 import express from 'express'
 import cors from 'cors'
 
-import { PORT } from './config/app'
+import { PORT } from '@config/app'
 import routes from './routes'
 
 createConnection().then(async _ => {

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction as Next } from 'express'
 import { Storage } from '@google-cloud/storage'
 import path from 'path'
 
-import storageConfig, { BUCKET } from '../config/gcs'
+import storageConfig, { BUCKET } from '@config/gcs'
 
 const storage = new Storage(storageConfig)
 const bucket = storage.bucket(BUCKET)

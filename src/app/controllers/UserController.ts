@@ -2,8 +2,7 @@ import { Request, Response } from 'express'
 import { getCustomRepository } from 'typeorm'
 import bcrypt from 'bcryptjs'
 
-import { UserRepository } from '../repository/UserRepository'
-import { BASE_CLOUD_FILE_URL } from '../config/app'
+import { UserRepository } from '@app/repositories/UserRepository'
 
 class UserController {
   public async show(req: Request, res: Response) {
@@ -16,19 +15,7 @@ class UserController {
     if (!user)
       return res.status(400).json({ error: 'No user with the passed id.' })
 
-    return res.json({ 
-      user: {
-        ...user,
-        avatar: user.avatar && `${BASE_CLOUD_FILE_URL}/${user.avatar}`,
-        posts: user.posts.map(post => ({
-          ...post,
-          user: {
-            ...post.user,
-            avatar: user.avatar && `${BASE_CLOUD_FILE_URL}/${user.avatar}`
-          }
-        }))
-      } 
-    })
+    return res.json({ user })
   }
 
   public async store(req: Request, res: Response) {

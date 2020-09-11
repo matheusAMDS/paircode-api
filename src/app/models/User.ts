@@ -1,6 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToMany } from "typeorm"
+import { Exclude, Transform } from 'class-transformer'
+import { 
+  Entity, 
+  PrimaryGeneratedColumn, 
+  Column, 
+  JoinColumn, 
+  OneToMany,
+  AfterLoad
+} from "typeorm"
 
-import { Post } from '../entity/Post'
+import { Post } from './Post'
+import { BASE_CLOUD_FILE_URL } from '@config/app'
 
 @Entity()
 export class User {
@@ -32,4 +41,10 @@ export class User {
   @OneToMany(type => Post, post => post.user)
   @JoinColumn()
   posts: Post[];
+
+  @AfterLoad()
+  private exposeAvatarUrl() {
+    this.avatar = `${BASE_CLOUD_FILE_URL}/${this.avatar}`
+  }
+
 }

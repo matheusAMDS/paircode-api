@@ -1,12 +1,12 @@
 import { Router } from 'express'
 
-import uploader from './middleware/upload'
-import sendToGCS from './middleware/sendToGCS'
-import verifyAuth from './middleware/verifyAuth'
+import uploader from '@app/middlewares/upload'
+import sendToGCS from '@app/middlewares/sendToGCS'
+import verifyAuth from '@app/middlewares/verifyAuth'
 
-import UserController from './controller/UserController'
-import SessionController from './controller/SessionController'
-import PostController from './controller/PostController'
+import UserController from '@app/controllers/UserController'
+import SessionController from '@app/controllers/SessionController'
+import PostController from '@app/controllers/PostController'
 
 const router = Router()
 

@@ -1,9 +1,8 @@
 import { getRepository, getCustomRepository } from 'typeorm'
 import { Request, Response } from 'express'
 
-import { Post } from '../entity/Post'
-import { UserRepository } from '../repository/UserRepository'
-import { BASE_CLOUD_FILE_URL } from '../config/app'
+import { Post } from '@app/models/Post'
+import { UserRepository } from '@app/repositories/UserRepository'
 
 class PostController {
   public async index(req: Request, res: Response) {
@@ -19,15 +18,7 @@ class PostController {
       }
     })
 
-    const serializedPosts = posts.map(post => ({
-      ...post,
-      user: {
-        ...post.user,
-        avatar: post.user.avatar && `${BASE_CLOUD_FILE_URL}/${post.user.avatar}`
-      }
-    }))
-
-    return res.json({ posts: serializedPosts })
+    return res.json({ posts })
   }
 
   public async store(req: Request, res: Response) {
