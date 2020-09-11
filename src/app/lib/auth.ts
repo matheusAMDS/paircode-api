@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction as Next } from 'express'
 
-import { SECRET } from '@config/auth'
+import { SECRET, ACCESS_OPTIONS } from '@config/auth'
 
 interface Decoded {
   id: number;
@@ -10,7 +10,11 @@ interface Decoded {
   iat: number;
 }
 
-const verifyAuth = (req: Request, res: Response, next: Next) => {
+export const generateAccessToken = (id: number) => {
+  return jwt.sign({ id }, SECRET, ACCESS_OPTIONS)
+}
+
+export const verifyAuth = (req: Request, res: Response, next: Next) => {
   const { authorization } = req.headers
 
   if (!authorization)
@@ -36,5 +40,3 @@ const verifyAuth = (req: Request, res: Response, next: Next) => {
     next()
   })
 }
-
-export default verifyAuth

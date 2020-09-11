@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { getCustomRepository } from 'typeorm'
 import bcrypt from 'bcryptjs'
 
+import QueueManager from '@app/lib/queue'
 import { UserRepository } from '@app/repositories/UserRepository'
 
 class UserController {
@@ -33,6 +34,11 @@ class UserController {
       email,
       whatsapp,
       passwordHash: await bcrypt.hash(password, 10),
+    })
+
+    await QueueManager.add('RegistrationMail', {
+      name: `${firstName} ${lastName}`,
+      email
     })
 
     return res.status(201).end()

@@ -1,13 +1,17 @@
 import { Request, Response, NextFunction as Next } from 'express'
+import multer from 'multer'
 import { Storage } from '@google-cloud/storage'
 import path from 'path'
 
+import uploadConfig from '@config/upload'
 import storageConfig, { BUCKET } from '@config/gcs'
 
 const storage = new Storage(storageConfig)
 const bucket = storage.bucket(BUCKET)
 
-export default function sendToGCS (req: Request, res: Response, next: Next) {
+export const uploader = multer(uploadConfig)
+
+export function sendToGCS (req: Request, res: Response, next: Next) {
   if (!req.file) {
     next()
   } else {

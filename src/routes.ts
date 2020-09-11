@@ -1,14 +1,17 @@
 import { Router } from 'express'
 
-import uploader from '@app/middlewares/upload'
-import sendToGCS from '@app/middlewares/sendToGCS'
-import verifyAuth from '@app/middlewares/verifyAuth'
+import { uploader, sendToGCS } from '@app/lib/upload'
+import { verifyAuth } from '@app/lib/auth'
 
 import UserController from '@app/controllers/UserController'
 import SessionController from '@app/controllers/SessionController'
 import PostController from '@app/controllers/PostController'
 
 const router = Router()
+
+router.get('/', (req, res) => {
+  return res.json({ message: 'Welcome to PairCode API!' })
+})
 
 router.post('/signin', SessionController.store)
 

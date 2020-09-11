@@ -1,4 +1,3 @@
-import { Exclude, Transform } from 'class-transformer'
 import { 
   Entity, 
   PrimaryGeneratedColumn, 
@@ -44,7 +43,8 @@ export class User {
 
   @AfterLoad()
   private exposeAvatarUrl() {
-    this.avatar = `${BASE_CLOUD_FILE_URL}/${this.avatar}`
+    if (this.avatar)
+      this.avatar = `${BASE_CLOUD_FILE_URL}/${this.avatar}`
   }
 
 }

@@ -1,10 +1,9 @@
 import { Request, Response } from 'express'
 import { getCustomRepository } from 'typeorm'
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
 
+import { generateAccessToken } from '@app/lib/auth'
 import { UserRepository } from '@app/repositories/UserRepository'
-import { SECRET, options } from '@config/auth'
 
 class SessionController {
   public async store(req: Request, res: Response) {
@@ -19,7 +18,7 @@ class SessionController {
     if (!await bcrypt.compare(password, user.passwordHash))
       return res.status(400).json({ error: "Wrong password." })
 
-    const token = jwt.sign({ id: user.id }, SECRET, options)
+    const token = generateAccessToken(user.id)
 
     return res.json({
       token,
