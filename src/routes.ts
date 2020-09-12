@@ -6,6 +6,7 @@ import { verifyAuth } from '@app/lib/auth'
 import UserController from '@app/controllers/UserController'
 import SessionController from '@app/controllers/SessionController'
 import PostController from '@app/controllers/PostController'
+import InterestController from '@app/controllers/InterestController'
 
 const router = Router()
 
@@ -28,5 +29,7 @@ router.put(
 router.get('/posts', PostController.index)
 router.post('/posts', verifyAuth, PostController.store)
 router.delete('/posts/:id', verifyAuth, PostController.delete)
+
+router.post('/posts/:id/interest', verifyAuth, InterestController.store)
 
 export default router

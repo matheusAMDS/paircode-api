@@ -1,21 +1,30 @@
 import { getRepository, getCustomRepository } from 'typeorm'
 import { Request, Response } from 'express'
 
-import { Post } from '@app/models/Post'
-import { UserRepository } from '@app/repositories/UserRepository'
+import Post from '@app/models/Post'
+import UserRepository from '@app/repositories/UserRepository'
+
+interface IndexQuery {
+  subject?: string;
+  user?: number;
+}
 
 class PostController {
   public async index(req: Request, res: Response) {
-    const userId = req.query.userId
+    const { subject, userId } = req.query
     const postRepository = getRepository(Post)
+
+    let query = {} as IndexQuery
+
+    if (subject)
+      query.subject = subject as string
+
+    if (userId)
+      query.user = Number(userId)
     
     const posts = await postRepository.find({
-      relations: [ 'user' ],
-      where: userId && {
-        user: {
-          id: Number(userId)
-        }
-      }
+      relations: [ 'user', 'interests', 'interests.user' ],
+      where: query
     })
 
     return res.json({ posts })

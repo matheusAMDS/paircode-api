@@ -3,7 +3,7 @@ import { getCustomRepository } from 'typeorm'
 import bcrypt from 'bcryptjs'
 
 import { generateAccessToken } from '@app/lib/auth'
-import { UserRepository } from '@app/repositories/UserRepository'
+import UserRepository from '@app/repositories/UserRepository'
 
 class SessionController {
   public async store(req: Request, res: Response) {

@@ -3,14 +3,14 @@ import { getCustomRepository } from 'typeorm'
 import bcrypt from 'bcryptjs'
 
 import QueueManager from '@app/lib/queue'
-import { UserRepository } from '@app/repositories/UserRepository'
+import UserRepository from '@app/repositories/UserRepository'
 
 class UserController {
   public async show(req: Request, res: Response) {
     const userId = req.userId as number
     const userRepository = getCustomRepository(UserRepository)
     const user = await userRepository.findOne({ id: userId }, {
-      relations: [ 'posts', 'posts.user' ]
+      relations: [ 'posts', 'posts.user', 'interests', 'interests.post' ]
     })
     
     if (!user)

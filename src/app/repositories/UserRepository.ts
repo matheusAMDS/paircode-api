@@ -5,10 +5,10 @@ import {
   FindOneOptions 
 } from 'typeorm'
 
-import { User } from '@app/models/User'
+import User from '@app/models/User'
 
 @EntityRepository(User)
-export class UserRepository extends Repository<User> {
+export default class UserRepository extends Repository<User> {
   public findOneWithPassword(
     query: FindConditions<User | undefined>, 
     options?: FindOneOptions<User | undefined>

@@ -3,13 +3,15 @@ import {
   Column, 
   CreateDateColumn, 
   PrimaryGeneratedColumn,
-  ManyToOne
+  ManyToOne,
+  OneToMany
 } from 'typeorm'
 
-import { User } from './User'
+import Interest from './Interest'
+import User from './User'
 
 @Entity()
-export class Post {
+export default class Post {
 
   @PrimaryGeneratedColumn()
   id: number;
@@ -22,5 +24,8 @@ export class Post {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @OneToMany(type => Interest, interest => interest.post)
+  interests: Interest[]
 
 }
